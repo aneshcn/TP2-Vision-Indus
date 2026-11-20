@@ -1,4 +1,3 @@
-
 clc;
 clear all;
 close all;
@@ -17,12 +16,12 @@ title('Image originale');
 subplot(1,2,2);
 imshow(X);
 title('Image en niveaux de gris');
+h3 = [1  0 -1;
+      2  0 -2;
+      1  0 -1];
 
-h3 = [1 0 -1;
-      2 0 -2;
-      1 0 -1];
-
-Inspection3 = conv2(X,h3);
+% Application du masque h3 sur X
+Inspection3 = conv2(IM,h3);
 
 figure;
 
@@ -36,21 +35,29 @@ title('Resultat du filtre h3');
 
 subplot(3,1,3);
 imshow(mat2gray(abs(Inspection3)));
-title('Valeur absolue de h3');
+title('Valeur absolue du filtre h3');
 
+% Transposee du masque h3
 Gy = h3';
 
+% Application des deux masques sur IM
 Insp1 = filter2(h3,IM);
 Insp2 = filter2(Gy,IM);
 
 G = sqrt(Insp1.^2 + Insp2.^2);
 
+% Calcul du range
 Gmax = max(G(:));
 Gmin = min(G(:));
 dx = Gmax-Gmin;
 
-Gn = 255*(G-Gmin)/dx;
+if dx ~= 0
+    Gn = 255*(G-Gmin)/dx;
+else
+    Gn = zeros(size(G));
+end
+
 
 figure;
-imshow(Gn);
+imshow(uint8(Gn));
 title('Gradient normalise Gn');
