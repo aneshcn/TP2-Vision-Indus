@@ -59,5 +59,5 @@ end
 
 
 figure;
-imshow(Gn);
+imshow(Gn);;
 title('Gradient normalise Gn');
