@@ -61,5 +61,5 @@ else
 end
 
 figure;
-imshow(uint8(Gn));
+imshow(Gn);
 title('Gradient normalise Gn');
