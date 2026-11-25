@@ -49,5 +49,5 @@ else
 end
 
 figure;
-imshow(uint8(Gn));
+imshow(Gn);
 title('Image normalisee Gn');
